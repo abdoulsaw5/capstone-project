@@ -167,3 +167,60 @@ actually talk about the project as a team.
 **What I learned:** Updating the context file right after a milestone is the 
 right move. If I had waited a week I would have forgotten half the details from 
 the test. The file works best when it actually reflects where things are right now.
+
+
+## 2026-05-08 — Creating Airtable error monitoring views for Week 10
+
+**Context:** Week 10 lab required adding error handling visibility to the dashboard.
+Had access to the shared Airtable base. Needed to create views that make errors 
+visible across the pipeline.
+
+**Prompt:**
+> What views should I create in Airtable to make pipeline errors visible for my 
+> Integration/Dashboard component? My project is a Security Alert Triage Bot with 
+> an Alerts table that has a status field with values like Analyzed, error, New.
+
+**Result:** Copilot recommended creating three views: Pipeline Status grouped by 
+status field, Error Monitor filtered to status = "error", and Component Activity 
+sorted by timestamp to show the flow of records through the system.
+
+**Evaluation:** The suggestions were accurate and matched exactly what the lab 
+required. Creating the views in Airtable was straightforward once I knew what to 
+build. The Pipeline Status view immediately showed the split between 6 Analyzed 
+records and 1 error record which is exactly what a SOC manager would want to see.
+
+**What I changed:** Added a test record (alert-error-001) manually to populate the 
+Error Monitor view since no real error records existed yet. Set status to "error" 
+and error_reason to "missing required field: destination_ip".
+
+**What I learned:** Having a dedicated error view makes problems visible immediately 
+instead of being buried in the main grid. This is the kind of thing that makes a 
+dashboard actually useful in production rather than just a demo.
+
+---
+
+## 2026-05-08 — Documenting confidence-based routing for the dashboard
+
+**Context:** Week 10 required confidence-based routing logic. As the Integration 
+component, my equivalent is severity-based routing in the Streamlit dashboard.
+
+**Prompt:**
+> As the Integration/Dashboard component in a Security Alert Triage Bot, how should 
+> I implement confidence-based routing? My dashboard already shows alerts split by 
+> severity. How does severity act as a routing mechanism for SOC analyst?
+
+**Result:** Copilot confirmed that severity tiers act as the equivalent of confidence 
+routing for the dashboard component. Critical alerts (8 min response time), High 
+alerts (20 min), and Low alerts (90 min) represent different routing paths that 
+tell analysts where to focus first.
+
+**Evaluation:** This was a good reframe. I already had the routing built into the 
+dashboard without thinking of it that way. Copilot helped me articulate why it 
+counts as routing logic rather than just a display feature.
+
+**What I changed:** Nothing in the code. Just documented the routing logic more 
+clearly so it could be explained in the lab submission.
+
+**What I learned:** Routing logic does not have to be an IF node in n8n. Anything 
+that directs attention or action differently based on a value is routing. The 
+dashboard does this visually through color coding and response time tiers.
